@@ -12,7 +12,7 @@ $(document).on("keypress", function (e) {
     if (level === 0 && gameOver === true) {
 
         $("body").removeClass("game-over");
-        $("#level-title").text("New game!").css("color", "orange");
+        $("#level-title").text("New game!").css("color", "#F8F8FF");
         setTimeout(nextSequence, 1000)
     }
 });
@@ -23,7 +23,7 @@ function checkUserAnswer(indexOfSequence) {
         console.log("right answer")
         userSequence = [];
 
-        $("#level-title").text("Pay Attention!").css("color", "orange");
+        $("#level-title").text("Pay Attention!").css("color", "#F8F8FF");
         //repeat the pattern
         repeatSequence()
         //If the answer if right but are items left in the sequence
@@ -32,7 +32,7 @@ function checkUserAnswer(indexOfSequence) {
     } else {
         playSound("wrong")
         $("body").addClass("game-over");
-        $("#level-title").text("Game Over! Press any key to Restart").css("color", "white");
+        $("#level-title").text("Game Over! Press any key to Restart").css("color", "#F8F8FF");
         restart()
     }
 
@@ -61,7 +61,7 @@ function nextSequence() {
     // setTimeout(repeatSequence("#" + randomColor), 500);
     level++;
 
-    setTimeout(() => $("#level-title").text("Level " + level).css("color", "white"), 1000)
+    setTimeout(() => $("#level-title").text("Level " + level).css("color", "#F8F8FF"), 1000)
     console.log(gameSequence)
 }
 
