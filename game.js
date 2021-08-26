@@ -5,10 +5,11 @@ let userSequence = [];
 let level = 0;
 let gameOver = false;
 let numberOfUserClicks = 0
+let speed_ms = 700
 // let temporaryUserIndex=0;
 //first iteration
 $(document).on("click keypress", function (e) {
-    if (level === 0 && gameOver === false) setTimeout(nextSequence, 1000);
+    if (level === 0 && gameOver === false) setTimeout(nextSequence, speed_ms);
     if (level === 0 && gameOver === true) {
         gameOver = false;
         setTimeout(() => {
@@ -16,7 +17,7 @@ $(document).on("click keypress", function (e) {
             $("#level-title").text("New game!").css("color", "#F8F8FF");
             nextSequence()
 
-        }, 500)
+        }, (speed_ms / 2))
     }
     if (gameOver === true) restart();
 });
@@ -27,7 +28,7 @@ function checkUserAnswer(indexOfSequence) {
         console.log("right answer")
         userSequence = [];
 
-        $("#level-title").text("Pay Attention!").css("color", "#F8F8FF");
+
         //repeat the pattern
         repeatSequence()
         //If the answer if right but are items left in the sequence
@@ -66,22 +67,22 @@ function nextSequence() {
     // setTimeout(repeatSequence("#" + randomColor), 500);
     level++;
 
-    setTimeout(() => $("#level-title").text("Level " + level).css("color", "#F8F8FF"), 1000)
+    setTimeout(() => $("#level-title").text("Level " + level).css("color", "#F8F8FF"), speed_ms)
     console.log(gameSequence)
 }
 
 
 function repeatSequence() {
     // $(colorName).fadeOut(150).fadeIn(150).fadeOut(150).fadeIn(150);
-
+    setTimeout($("#level-title").text("Pay Attention!").css("color", "#F8F8FF"), speed_ms);
     gameSequence.forEach((color, index) => {
 
         setTimeout(() => {
             playSound(gameSequence[index])
-            $("#" + gameSequence[index]).fadeOut(150).fadeIn(150).fadeOut(150).fadeIn(150);
-        }, (index * 1000) + 1000)
+            $("#" + gameSequence[index]).fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100);
+        }, (index * speed_ms) + speed_ms)
     })
-    setTimeout(nextSequence, 1000 * gameSequence.length + 1000);
+    setTimeout(nextSequence, speed_ms * gameSequence.length + speed_ms);
 }
 
 const playSound = function (name) {
