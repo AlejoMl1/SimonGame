@@ -7,14 +7,18 @@ let gameOver = false;
 let numberOfUserClicks = 0
 // let temporaryUserIndex=0;
 //first iteration
-$(document).on("keypress", function (e) {
+$(document).on("click keypress", function (e) {
     if (level === 0 && gameOver === false) setTimeout(nextSequence, 1000);
     if (level === 0 && gameOver === true) {
-
-        $("body").removeClass("game-over");
-        $("#level-title").text("New game!").css("color", "#F8F8FF");
-        setTimeout(nextSequence, 1000)
+        gameOver = false;
+        setTimeout(() => {
+            $("body").removeClass("game-over");
+            $("#level-title").text("New game!").css("color", "#F8F8FF");
+            nextSequence()
+            g
+        }, 500)
     }
+    if (gameOver === true) restart();
 });
 
 function checkUserAnswer(indexOfSequence) {
@@ -30,10 +34,11 @@ function checkUserAnswer(indexOfSequence) {
     } else if (gameSequence[indexOfSequence] === userSequence[indexOfSequence]) {
         console.log("right answer")
     } else {
+        gameOver = true;
         playSound("wrong")
         $("body").addClass("game-over");
-        $("#level-title").text("Game Over! Press any key to Restart").css("color", "#F8F8FF");
-        restart()
+        $("#level-title").text("Game Over! Click anywhere to restart").css("color", "#F8F8FF");
+
     }
 
 }
@@ -103,7 +108,6 @@ function restart() {
     gameSequence = [];
     level = 0;
     userSequence = [];
-    gameOver = true;
 
 
 }
