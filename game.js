@@ -15,7 +15,7 @@ $(document).on("click keypress", function (e) {
             $("body").removeClass("game-over");
             $("#level-title").text("New game!").css("color", "#F8F8FF");
             nextSequence()
-            g
+
         }, 500)
     }
     if (gameOver === true) restart();
